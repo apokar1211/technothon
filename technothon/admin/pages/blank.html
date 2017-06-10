@@ -1,0 +1,55 @@
+
+        <!-- Page Content -->
+        <div id="page-wrapper">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1 class="page-header">Event</h1>
+                    </div>
+                    <!-- /.col-lg-12 -->
+                </div>
+                <!-- /.row -->
+				<div class="row">
+					<div class="panel-body">
+						<form name="f1" class="form-control" method="post" action="#">
+							<input type="text" name="event" class="form-control" placeholder="Enter Event Name.." />
+							<select name="branch" class="form-control">
+							<?php
+								$s="select * from branch";
+								$tmp=mysqli_query($c,$s);
+								while($result=mysqli_fetch_array($tmp))
+								{
+									$name=$result['name'];			
+								?>
+									<option><?php echo $name;?></option>
+								<?php
+								}	
+							?>
+							</select>
+							<input type="text" class="form-control" name="fees" placeholder="Enter Fees.." />
+							<input type="submit" name="save" class="btn btn-primary btn-block" value="Save" />
+						</form>
+						<?php
+							if(isset($_POST['save']))
+							{
+								$event=$_POST['event'];
+								$branch=$_POST['branch'];
+								$fees=$_POST['fees'];				
+							
+								$i="insert into event values('','$event','$branch',$fees)";
+								if(mysqli_query($c,$i))
+								{
+									echo "<script>alert('Event Added!!');</script>";
+									
+								}
+							}
+							
+						
+						?>
+		
+					</div>	
+				</div>
+            </div>
+            <!-- /.container-fluid -->
+        </div>
+        <!-- /#page-wrapper -->
